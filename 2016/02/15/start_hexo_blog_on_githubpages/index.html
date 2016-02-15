@@ -21,7 +21,7 @@
 学习的热情总是一阵一阵的非常想搞懂android的编解码和图形系统，跑了下VLC和MediaCodec的app，发现硬解码在Nuf的板子上不行啊。顺藤摸瓜，感觉有必要记一笔。
 
 1.commshare.github.io2.windows上安装nodejs，这个是hexo的后台，会找到npm命令。3.安装hexo如果直接右键打开">
-<meta property="og:updated_time" content="2016-02-15T03:11:34.094Z">
+<meta property="og:updated_time" content="2016-02-15T03:13:13.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="github pages的hexo博客标签（空格分隔）： 未分类
@@ -78,7 +78,7 @@
         <section id="main"><article id="post-start_hexo_blog_on_githubpages" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/15/start_hexo_blog_on_githubpages/" class="article-date">
-  <time datetime="2016-02-15T03:11:34.094Z" itemprop="datePublished">2016-02-15</time>
+  <time datetime="2016-02-15T03:13:13.518Z" itemprop="datePublished">2016-02-15</time>
 </a>
     
   </div>
@@ -107,12 +107,12 @@ branch: master
 </code></pre><p>这里用git，而不是github，前提是得安装一个module：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
 <p>hexo deploy 会把public目录上传到github上，前提是<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com     <span class="comment">##测试ssh。</span></span><br></pre></td></tr></table></figure></p>
 <p>可以在git下打开~.ssh/看下.pub文件，加入到github中。</p>
-<h2 id="6-域名"><a href="#6-域名" class="headerlink" title="6.域名"></a>6.域名</h2><p>在public目录下加入CNAME文件，里头写blog.ixiaomo.net<br>这样github会把对commshare.github.io和blog.ixiaomo.net映射。<br>阿里云里CNMAE blog到commshare.github.io，此时，访问commshare.github.io会被github跳转到blog.ixiaomo.net，而blog.ixiaomo.net会被阿里云导入到github网站，github网站会按照CNAME文件找到为内部的commshare.github.io.</p>
+<h2 id="6-域名"><a href="#6-域名" class="headerlink" title="6.域名"></a>6.域名</h2><p>在source目录下加入CNAME文件，里头写blog.ixiaomo.net<br>这样github会把对commshare.github.io和blog.ixiaomo.net映射。<br>阿里云里CNMAE blog到commshare.github.io，此时，访问commshare.github.io会被github跳转到blog.ixiaomo.net，而blog.ixiaomo.net会被阿里云导入到github网站，github网站会按照CNAME文件找到为内部的commshare.github.io.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/15/start_hexo_blog_on_githubpages/" data-id="cikneggy90001eo6hxxgtbq7v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/15/start_hexo_blog_on_githubpages/" data-id="ciknepff00000ds6hlkkdkm0j" class="article-share-link">Share</a>
       
       
     </footer>
