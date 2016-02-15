@@ -95,7 +95,7 @@ var _hmt = _hmt || [];
     <article id="post-start_hexo_blog_on_githubpages" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/15/start_hexo_blog_on_githubpages/" class="article-date">
-  <time datetime="2016-02-15T05:20:43.701Z" itemprop="datePublished">2016-02-15</time>
+  <time datetime="2016-02-15T06:55:02.648Z" itemprop="datePublished">2016-02-15</time>
 </a>
     
   </div>
@@ -137,7 +137,20 @@ branch: master
 <p>hexo deploy 会把public目录上传到github上，前提是<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com     <span class="comment">##测试ssh。</span></span><br></pre></td></tr></table></figure></p>
 <p>可以在git下打开~.ssh/看下.pub文件，加入到github中。</p>
 <h2 id="6-域名"><a href="#6-域名" class="headerlink" title="6.域名"></a>6.域名</h2><p>在source目录下加入CNAME文件，里头写blog.ixiaomo.net<br>这样github会把对commshare.github.io和blog.ixiaomo.net映射。<br>阿里云里CNMAE blog到commshare.github.io，此时，访问commshare.github.io会被github跳转到blog.ixiaomo.net，而blog.ixiaomo.net会被阿里云导入到github网站，github网站会按照CNAME文件找到为内部的commshare.github.io.</p>
-
+<h2 id="6-部署主题"><a href="#6-部署主题" class="headerlink" title="6.部署主题"></a>6.部署主题</h2><blockquote>
+<p>采用了著名的主题next 等后，发现配色暗淡，还是使用landscape，但又觉得不爽</p>
+<ol>
+<li><a href="http://shijiajie.com/2015/08/29/hexo-theme-landscape-plus-optimize/" target="_blank" rel="external">stone的修改</a></li>
+<li>主题下面的config文件里头有推荐文章啥的，我改了下</li>
+<li>部署的时候记得clean和g，然后deploy，否则有些主题样式不正确。</li>
+</ol>
+</blockquote>
+<pre><code>hexo clean #删除public目录
+hexo g ##生成
+hexo server #调试
+hexo s --debug #也是调试
+hexo d #发布
+</code></pre>
       
       
 
@@ -146,7 +159,7 @@ branch: master
     
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/02/15/start_hexo_blog_on_githubpages/" data-id="ciknm9fyu0000tk6h7gpmjk0j" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2016/02/15/start_hexo_blog_on_githubpages/" data-id="ciknmkq3p0000606hgypibxcf" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -203,7 +216,7 @@ branch: master
     
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/02/15/hello-world/" data-id="ciknm9fz60001tk6h6ocywpyg" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2016/02/15/hello-world/" data-id="ciknmkq420001606h67fscnc5" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
