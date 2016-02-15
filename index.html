@@ -64,7 +64,7 @@
     <article id="post-start_hexo_blog_on_githubpages" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/15/start_hexo_blog_on_githubpages/" class="article-date">
-  <time datetime="2016-02-15T02:52:59.918Z" itemprop="datePublished">2016-02-15</time>
+  <time datetime="2016-02-15T03:04:03.352Z" itemprop="datePublished">2016-02-15</time>
 </a>
     
   </div>
@@ -75,32 +75,31 @@
       
         <h1 id="github-pages的hexo博客"><a href="#github-pages的hexo博客" class="headerlink" title="github pages的hexo博客"></a>github pages的hexo博客</h1><p>标签（空格分隔）： 未分类</p>
 <hr>
-<p>the new text here</p>
-<p>###学习的热情总是一阵一阵的</p>
+<p>#学习的热情总是一阵一阵的</p>
 <blockquote>
 <p>非常想搞懂android的编解码和图形系统，跑了下VLC和MediaCodec的app，发现硬解码在Nuf的板子上不行啊。顺藤摸瓜，感觉有必要记一笔。</p>
 </blockquote>
-<p>####1.commshare.github.io</p>
-<p>####2.windows上安装nodejs，这个是hexo的后台，会找到npm命令。</p>
-<p>####3.安装hexo<br>如果直接右键打开git bash，貌似找不到刚刚安装的npm，我只好用所有程序里头的git bash了。<br><a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">参考这个</a></p>
+<p>##1.commshare.github.io</p>
+<p>##2.windows上安装nodejs，这个是hexo的后台，会找到npm命令。</p>
+<p>##3.安装hexo<br>如果直接右键打开git bash，貌似找不到刚刚安装的npm，我只好用所有程序里头的git bash了。<br><a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">参考这个</a></p>
 <pre><code>npm install hexo-cli -g
 npm install hexo --save
 
 #如果命令无法运行，可以尝试更换taobao的npm源
 npm install -g cnpm --registry=https://registry.npm.taobao.org
-</code></pre><p>####4. hexo 测试<br><a href="http://www.cnblogs.com/liulangmao/p/4323064.html" target="_blank" rel="external">参考</a>,首先在磁盘<br>建立一个目录，叫做hexo吧，然后在此目录下，<br>    hexo init<br>再<br>    npm install<br>    hexo generate<br>    hexo server<br>然后<br>    localhost:4000</p>
-<p>###5.部署<br>修改</p>
+</code></pre><p>##4. hexo 测试<br><a href="http://www.cnblogs.com/liulangmao/p/4323064.html" target="_blank" rel="external">参考</a>,首先在磁盘<br>建立一个目录，叫做hexo吧，然后在此目录下，<br>    hexo init<br>再<br>    npm install<br>    hexo generate<br>    hexo server<br>然后<br>    localhost:4000</p>
+<p>##5.部署<br>修改</p>
 <pre><code>deploy:
 type: git
 repository: git@github.com:commshare/commshare.github.io.git
 branch: master
 </code></pre><p>这里用git，而不是github，前提是得安装一个module：<br>    npm install hexo-deployer-git –save<br>hexo deploy 会把public目录上传到github上，前提是<br>    ssh -T git@github.com     ##测试ssh。<br>可以在git下打开~.ssh/看下.pub文件，加入到github中。</p>
-<p>###6.域名<br>在public目录下加入CNAME文件，里头写blog.ixiaomo.net<br>这样github会把对commshare.github.io和blog.ixiaomo.net映射。<br>阿里云里CNMAE blog到commshare.github.io，此时，访问commshare.github.io会被github跳转到blog.ixiaomo.net，而blog.ixiaomo.net会被阿里云导入到github网站，github网站会按照CNAME文件找到为内部的commshare.github.io.</p>
+<p>##6.域名<br>在public目录下加入CNAME文件，里头写blog.ixiaomo.net<br>这样github会把对commshare.github.io和blog.ixiaomo.net映射。<br>阿里云里CNMAE blog到commshare.github.io，此时，访问commshare.github.io会被github跳转到blog.ixiaomo.net，而blog.ixiaomo.net会被阿里云导入到github网站，github网站会按照CNAME文件找到为内部的commshare.github.io.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/15/start_hexo_blog_on_githubpages/" data-id="cikne01on0001lw6hfjjh6r5n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/15/start_hexo_blog_on_githubpages/" data-id="cikned4lc00012k6ht3ia5l7d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -145,7 +144,7 @@ branch: master
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/15/hello-world/" data-id="cikne01o80000lw6ht3w87dwx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/15/hello-world/" data-id="cikned4kz00002k6haq7aycjf" class="article-share-link">Share</a>
       
       
     </footer>
