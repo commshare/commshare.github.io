@@ -1,0 +1,670 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="850 EVO 经常导致我的硬盘上的虚拟机文件被错误覆盖并丢失。错误的文件经常是这个保存磁盘信息的文件CentOS7_64_desktop.vmdk
+
+使用下面的内容覆盖CentOS7_64_desktop.vmdk，好了12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VMWARE指定的文件不是虚拟磁盘">
+<meta property="og:url" content="http://yoursite.com/2016/02/20/VMWARE_NOT_VIRTUAL_DISK/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="850 EVO 经常导致我的硬盘上的虚拟机文件被错误覆盖并丢失。错误的文件经常是这个保存磁盘信息的文件CentOS7_64_desktop.vmdk
+
+使用下面的内容覆盖CentOS7_64_desktop.vmdk，好了12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849">
+<meta property="og:updated_time" content="2016-02-20T03:12:51.688Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VMWARE指定的文件不是虚拟磁盘">
+<meta name="twitter:description" content="850 EVO 经常导致我的硬盘上的虚拟机文件被错误覆盖并丢失。错误的文件经常是这个保存磁盘信息的文件CentOS7_64_desktop.vmdk
+
+使用下面的内容覆盖CentOS7_64_desktop.vmdk，好了12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> VMWARE指定的文件不是虚拟磁盘 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                VMWARE指定的文件不是虚拟磁盘
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2016-02-20T11:12:51+08:00" content="2016-02-20">
+              2016-02-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>850 EVO 经常导致我的硬盘上的虚拟机文件被错误覆盖并丢失。<br>错误的文件经常是这个保存磁盘信息的文件CentOS7_64_desktop.vmdk</p>
+</blockquote>
+<h1 id="使用下面的内容覆盖CentOS7-64-desktop-vmdk，好了"><a href="#使用下面的内容覆盖CentOS7-64-desktop-vmdk，好了" class="headerlink" title="使用下面的内容覆盖CentOS7_64_desktop.vmdk，好了"></a>使用下面的内容覆盖CentOS7_64_desktop.vmdk，好了</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># Disk DescriptorFile</span></span><br><span class="line">version=<span class="number">1</span></span><br><span class="line">encoding=<span class="string">"GBK"</span></span><br><span class="line">CID=fffffffe</span><br><span class="line">parentCID=ffffffff</span><br><span class="line">isNativeSnapshot=<span class="string">"no"</span></span><br><span class="line">createType=<span class="string">"twoGbMaxExtentSparse"</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># Extent description</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s001.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s002.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s003.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s004.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s005.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s006.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s007.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s008.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s009.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s010.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s011.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s012.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s013.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s014.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s015.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s016.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s017.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s018.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s019.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s020.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s021.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s022.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s023.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s024.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s025.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s026.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s027.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s028.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s029.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s030.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s031.vmdk"</span></span><br><span class="line">RW <span class="number">13107200</span> SPARSE <span class="string">"CentOS7_64_desktop-s032.vmdk"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># The Disk Data Base </span></span><br><span class="line"><span class="preprocessor">#DDB</span></span><br><span class="line"></span><br><span class="line">ddb.adapterType = <span class="string">"lsilogic"</span></span><br><span class="line">ddb.geometry.cylinders = <span class="string">"26108"</span></span><br><span class="line">ddb.geometry.heads = <span class="string">"255"</span></span><br><span class="line">ddb.geometry.sectors = <span class="string">"63"</span></span><br><span class="line">ddb.longContentID = <span class="string">"9ffea900472a422fb3361468fffffffe"</span></span><br><span class="line">ddb.uuid = <span class="string">"60 00 C2 95 81 1f b0 91-77 fc cd 12 49 cb 99 00"</span></span><br><span class="line">ddb.virtualHWVersion = <span class="string">"11"</span></span><br></pre></td></tr></table></figure>
+<h1 id="虚拟机的配置文件是CentOS7-64-vmx"><a href="#虚拟机的配置文件是CentOS7-64-vmx" class="headerlink" title="虚拟机的配置文件是CentOS7_64.vmx"></a>虚拟机的配置文件是CentOS7_64.vmx</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.encoding</span> = <span class="string">"GBK"</span></span><br><span class="line">config<span class="class">.version</span> = <span class="string">"8"</span></span><br><span class="line">virtualHW<span class="class">.version</span> = <span class="string">"11"</span></span><br><span class="line">numvcpus = <span class="string">"4"</span></span><br><span class="line">vcpu<span class="class">.hotadd</span> = <span class="string">"TRUE"</span></span><br><span class="line">scsi0<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">scsi0<span class="class">.virtualDev</span> = <span class="string">"lsilogic"</span></span><br><span class="line">memsize = <span class="string">"4096"</span></span><br><span class="line">mem<span class="class">.hotadd</span> = <span class="string">"TRUE"</span></span><br><span class="line">scsi0:<span class="number">0</span><span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">scsi0:<span class="number">0</span><span class="class">.fileName</span> = <span class="string">"disk\CentOS7_64_desktop.vmdk"</span></span><br><span class="line">ide1:<span class="number">0</span><span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">ide1:<span class="number">0</span><span class="class">.fileName</span> = <span class="string">"auto detect"</span></span><br><span class="line">ide1:<span class="number">0</span><span class="class">.deviceType</span> = <span class="string">"cdrom-raw"</span></span><br><span class="line">ethernet0<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">ethernet0<span class="class">.virtualDev</span> = <span class="string">"e1000"</span></span><br><span class="line">ethernet0<span class="class">.wakeOnPcktRcv</span> = <span class="string">"FALSE"</span></span><br><span class="line">ethernet0<span class="class">.addressType</span> = <span class="string">"generated"</span></span><br><span class="line">usb<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">ehci<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">ehci<span class="class">.pciSlotNumber</span> = <span class="string">"35"</span></span><br><span class="line">sound<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">sound<span class="class">.fileName</span> = <span class="string">"-1"</span></span><br><span class="line">sound<span class="class">.autodetect</span> = <span class="string">"TRUE"</span></span><br><span class="line">serial0<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">serial0<span class="class">.fileType</span> = <span class="string">"thinprint"</span></span><br><span class="line">pciBridge0<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">pciBridge4<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">pciBridge4<span class="class">.virtualDev</span> = <span class="string">"pcieRootPort"</span></span><br><span class="line">pciBridge4<span class="class">.functions</span> = <span class="string">"8"</span></span><br><span class="line">pciBridge5<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">pciBridge5<span class="class">.virtualDev</span> = <span class="string">"pcieRootPort"</span></span><br><span class="line">pciBridge5<span class="class">.functions</span> = <span class="string">"8"</span></span><br><span class="line">pciBridge6<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">pciBridge6<span class="class">.virtualDev</span> = <span class="string">"pcieRootPort"</span></span><br><span class="line">pciBridge6<span class="class">.functions</span> = <span class="string">"8"</span></span><br><span class="line">pciBridge7<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">pciBridge7<span class="class">.virtualDev</span> = <span class="string">"pcieRootPort"</span></span><br><span class="line">pciBridge7<span class="class">.functions</span> = <span class="string">"8"</span></span><br><span class="line">vmci0<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">hpet0<span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">usb<span class="class">.vbluetooth</span><span class="class">.startConnected</span> = <span class="string">"TRUE"</span></span><br><span class="line">displayName = <span class="string">"CentOS7_64"</span></span><br><span class="line">guestOS = <span class="string">"centos-64"</span></span><br><span class="line">nvram = <span class="string">"CentOS7_64.nvram"</span></span><br><span class="line">virtualHW<span class="class">.productCompatibility</span> = <span class="string">"hosted"</span></span><br><span class="line">powerType<span class="class">.powerOff</span> = <span class="string">"soft"</span></span><br><span class="line">powerType<span class="class">.powerOn</span> = <span class="string">"soft"</span></span><br><span class="line">powerType<span class="class">.suspend</span> = <span class="string">"soft"</span></span><br><span class="line">powerType<span class="class">.reset</span> = <span class="string">"soft"</span></span><br><span class="line">extendedConfigFile = <span class="string">"CentOS7_64.vmxf"</span></span><br><span class="line">uuid<span class="class">.bios</span> = <span class="string">"56 4d ec 63 9c cc 1e 3d-a4 d2 4d 3e be dc e2 3c"</span></span><br><span class="line">uuid<span class="class">.location</span> = <span class="string">"56 4d ec 63 9c cc 1e 3d-a4 d2 4d 3e be dc e2 3c"</span></span><br><span class="line">replay<span class="class">.supported</span> = <span class="string">"FALSE"</span></span><br><span class="line">replay<span class="class">.filename</span> = <span class="string">""</span></span><br><span class="line">migrate<span class="class">.hostlog</span> = <span class="string">".\CentOS7_64-9c9a140e.hlog"</span></span><br><span class="line">scsi0:<span class="number">0</span><span class="class">.redo</span> = <span class="string">""</span></span><br><span class="line">pciBridge0<span class="class">.pciSlotNumber</span> = <span class="string">"17"</span></span><br><span class="line">pciBridge4<span class="class">.pciSlotNumber</span> = <span class="string">"21"</span></span><br><span class="line">pciBridge5<span class="class">.pciSlotNumber</span> = <span class="string">"22"</span></span><br><span class="line">pciBridge6<span class="class">.pciSlotNumber</span> = <span class="string">"23"</span></span><br><span class="line">pciBridge7<span class="class">.pciSlotNumber</span> = <span class="string">"24"</span></span><br><span class="line">scsi0<span class="class">.pciSlotNumber</span> = <span class="string">"16"</span></span><br><span class="line">usb<span class="class">.pciSlotNumber</span> = <span class="string">"32"</span></span><br><span class="line">ethernet0<span class="class">.pciSlotNumber</span> = <span class="string">"33"</span></span><br><span class="line">sound<span class="class">.pciSlotNumber</span> = <span class="string">"34"</span></span><br><span class="line">vmci0<span class="class">.pciSlotNumber</span> = <span class="string">"36"</span></span><br><span class="line">ethernet0<span class="class">.generatedAddress</span> = <span class="string">"00:0c:29:dc:e2:3c"</span></span><br><span class="line">ethernet0<span class="class">.generatedAddressOffset</span> = <span class="string">"0"</span></span><br><span class="line">vmci0<span class="class">.id</span> = <span class="string">"-1287067793"</span></span><br><span class="line">monitor<span class="class">.phys_bits_used</span> = <span class="string">"42"</span></span><br><span class="line">vmotion<span class="class">.checkpointFBSize</span> = <span class="string">"33554432"</span></span><br><span class="line">vmotion<span class="class">.checkpointSVGAPrimarySize</span> = <span class="string">"33554432"</span></span><br><span class="line">cleanShutdown = <span class="string">"FALSE"</span></span><br><span class="line">softPowerOff = <span class="string">"FALSE"</span></span><br><span class="line">usb:<span class="number">1</span><span class="class">.speed</span> = <span class="string">"2"</span></span><br><span class="line">usb:<span class="number">1</span><span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">usb:<span class="number">1</span><span class="class">.deviceType</span> = <span class="string">"hub"</span></span><br><span class="line">usb:<span class="number">1</span><span class="class">.port</span> = <span class="string">"1"</span></span><br><span class="line">usb:<span class="number">1</span><span class="class">.parent</span> = <span class="string">"-1"</span></span><br><span class="line">tools<span class="class">.syncTime</span> = <span class="string">"FALSE"</span></span><br><span class="line">ide1:<span class="number">0</span><span class="class">.startConnected</span> = <span class="string">"FALSE"</span></span><br><span class="line">tools<span class="class">.remindInstall</span> = <span class="string">"FALSE"</span></span><br><span class="line">ide1:<span class="number">0</span><span class="class">.autodetect</span> = <span class="string">"TRUE"</span></span><br><span class="line">gui<span class="class">.lastPoweredViewMode</span> = <span class="string">"fullscreen"</span></span><br><span class="line">usb<span class="class">.autoConnect</span><span class="class">.device0</span> = <span class="string">""</span></span><br><span class="line">usb<span class="class">.autoConnect</span><span class="class">.device1</span> = <span class="string">""</span></span><br><span class="line">checkpoint<span class="class">.vmState</span> = <span class="string">""</span></span><br><span class="line">gui<span class="class">.exitOnCLIHLT</span> = <span class="string">"TRUE"</span></span><br><span class="line">printers<span class="class">.enabled</span> = <span class="string">"TRUE"</span></span><br><span class="line">scsi0:<span class="number">1</span><span class="class">.present</span> = <span class="string">"FALSE"</span></span><br><span class="line">scsi0:<span class="number">2</span><span class="class">.present</span> = <span class="string">"FALSE"</span></span><br><span class="line">floppy0<span class="class">.present</span> = <span class="string">"FALSE"</span></span><br><span class="line">usb:<span class="number">0</span><span class="class">.present</span> = <span class="string">"TRUE"</span></span><br><span class="line">usb:<span class="number">0</span><span class="class">.deviceType</span> = <span class="string">"hid"</span></span><br><span class="line">usb:<span class="number">0</span><span class="class">.port</span> = <span class="string">"0"</span></span><br><span class="line">usb:<span class="number">0</span><span class="class">.parent</span> = <span class="string">"-1"</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/19/compile_vlc_centos7x64/" rel="next" title="Centos7x64_VLC_Compile">
+                <i class="fa fa-chevron-left"></i> Centos7x64_VLC_Compile
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+          
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用下面的内容覆盖CentOS7-64-desktop-vmdk，好了"><span class="nav-number">1.</span> <span class="nav-text">使用下面的内容覆盖CentOS7_64_desktop.vmdk，好了</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机的配置文件是CentOS7-64-vmx"><span class="nav-number">2.</span> <span class="nav-text">虚拟机的配置文件是CentOS7_64.vmx</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+</body>
+</html>
