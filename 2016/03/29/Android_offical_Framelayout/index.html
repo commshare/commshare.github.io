@@ -57,16 +57,31 @@
 
 
 
-<meta name="description" content="fromNuf的板子是4.4的，所以用api 19作为target，这样，studio中打开的SDK也是来自19的">
+<meta name="description" content="#官方文档Framelayout
+
+
+http://developer.android.com/reference/android/widget/FrameLayout.html
+
+1.1java.lang.Object   ↳    android.view.View        ↳    android.view.ViewGroup             ↳    android.widg">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MediaCodecExample">
-<meta property="og:url" content="http://yoursite.com/2016/02/18/mediacodec_example/index.html">
+<meta property="og:title" content="官方文档Framelayout翻译">
+<meta property="og:url" content="http://yoursite.com/2016/03/29/Android_offical_Framelayout/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="fromNuf的板子是4.4的，所以用api 19作为target，这样，studio中打开的SDK也是来自19的">
-<meta property="og:updated_time" content="2016-02-18T07:08:35.538Z">
+<meta property="og:description" content="#官方文档Framelayout
+
+
+http://developer.android.com/reference/android/widget/FrameLayout.html
+
+1.1java.lang.Object   ↳    android.view.View        ↳    android.view.ViewGroup             ↳    android.widg">
+<meta property="og:updated_time" content="2016-03-29T02:19:20.271Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MediaCodecExample">
-<meta name="twitter:description" content="fromNuf的板子是4.4的，所以用api 19作为target，这样，studio中打开的SDK也是来自19的">
+<meta name="twitter:title" content="官方文档Framelayout翻译">
+<meta name="twitter:description" content="#官方文档Framelayout
+
+
+http://developer.android.com/reference/android/widget/FrameLayout.html
+
+1.1java.lang.Object   ↳    android.view.View        ↳    android.view.ViewGroup             ↳    android.widg">
 
 
 
@@ -84,7 +99,7 @@
   };
 </script>
 
-  <title> MediaCodecExample | Hexo </title>
+  <title> 官方文档Framelayout翻译 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -224,7 +239,7 @@
             
             
               
-                MediaCodecExample
+                官方文档Framelayout翻译
               
             
           </h1>
@@ -236,8 +251,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-02-18T15:08:35+08:00" content="2016-02-18">
-              2016-02-18
+            <time itemprop="dateCreated" datetime="2016-03-29T10:19:20+08:00" content="2016-03-29">
+              2016-03-29
             </time>
           </span>
 
@@ -262,9 +277,27 @@
       
 
       
-        <blockquote>
-<p>from<br>Nuf的板子是4.4的，所以用api 19作为target，这样，studio中打开的SDK也是来自19的</p>
+        <p>#官方文档Framelayout</p>
+<hr>
+<blockquote>
+<p><a href="http://developer.android.com/reference/android/widget/FrameLayout.html" target="_blank" rel="external">http://developer.android.com/reference/android/widget/FrameLayout.html</a></p>
 </blockquote>
+<h1 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h1><p>java.lang.Object<br>   ↳    android.view.View<br>        ↳    android.view.ViewGroup<br>             ↳    android.widget.FrameLayout</p>
+<h1 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h1><p>用于block out 屏幕上的一块区域来显示一个单个的item。<br>一般来说，Framelayout 应该用于持有一个单独的子view，因为Framelayout很难组织子view适应不同搭配屏幕尺寸的情况下，不覆盖彼此。添加多个子view到Framelayout，要通过对每个view赋值android:layout_gravity 来控制每个子view在Framelayout中的位置。 子view会根据stack顺序绘制，这导致最近加入的view会在最上面。Framelayout的大小就是最大的child的大小（也算上了padding），可见与否要看Framelayout的父亲是否允许。View们gone要通过setConsiderGoneChildrenWhenMeasuring()为true来实现。</p>
+<h1 id="1-3-概要"><a href="#1-3-概要" class="headerlink" title="1.3 概要"></a>1.3 概要</h1><p>android:foregroundGravity  ||    setForegroundGravity(int) ||Defines the gravity to apply to the foreground drawable<br>android:measureAllChildren    setMeasureAllChildren(boolean)    Determines whether to measure all children or just those in the VISIBLE or INVISIBLE state when measuring. </p>
+<h1 id="14-XML-属性"><a href="#14-XML-属性" class="headerlink" title="14 XML 属性"></a>14 XML 属性</h1><h2 id="android-foregroundGravity"><a href="#android-foregroundGravity" class="headerlink" title="android:foregroundGravity"></a>android:foregroundGravity</h2><p>前景绘制需要的gravity ，默认的gravity是fill，必须是以下一个或者多个的下列常量值：</p>
+<p>top 对象在容器的上部，不改变大小。</p>
+<p>bottom    对象在容器的底部，不改变大小。</p>
+<p>left    push object to the left of its container, not changing its size.</p>
+<p>right        Push object to the right of its container, not changing its size.</p>
+<p>center_vertical    对象放在容器的垂直中间, not changing its size.</p>
+<p>fill_vertical    如果需要的话，对象要增大自己的垂直大小这样可以完全填满容器</p>
+<p>center_horizontal    对象放于容器的水平中间, not changing its size.</p>
+<p>fill_horizontal        Grow the horizontal size of the object if needed so it completely fills its container.</p>
+<p>center    把对象放置于容器的垂直和水平方向的中间， not changing its size.</p>
+<p>fill    Grow the horizontal and vertical size of the object if needed so it completely fills its container.</p>
+<p>clip_vertical    Additional option that can be set to have the top and/or bottom edges of the child clipped to its container’s bounds. The clip 依赖于垂直的graviy: a top gravity会 clip底部边缘, a bottom gravity裁剪顶部边缘, 否则，两个边缘都裁剪.</p>
+<p>clip_horizontal     Additional option that can be set to have the 左 和/或 右 edges of the child clipped to its container’s bounds. The clip will be based on the horizontal gravity: a left gravity will clip the right edge, a right gravity will clip the left edge, and neither will clip both edges.</p>
 
       
     </div>
@@ -276,17 +309,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/17/vlc_equalizer/" rel="next" title="VLC的均衡器">
-                <i class="fa fa-chevron-left"></i> VLC的均衡器
+              <a href="/2016/03/28/CPP2_5_UTILS/" rel="next" title="5 utils">
+                <i class="fa fa-chevron-left"></i> 5 utils
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/19/compile_vlc_centos7x64/" rel="prev" title="Centos7x64_VLC_Compile">
-                Centos7x64_VLC_Compile <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -390,7 +419,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目錄</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1"><span class="nav-number">1.</span> <span class="nav-text">1.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2"><span class="nav-number">2.</span> <span class="nav-text">1.2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-3-概要"><span class="nav-number">3.</span> <span class="nav-text">1.3 概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-XML-属性"><span class="nav-number">4.</span> <span class="nav-text">14 XML 属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#android-foregroundGravity"><span class="nav-number">4.1.</span> <span class="nav-text">android:foregroundGravity</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

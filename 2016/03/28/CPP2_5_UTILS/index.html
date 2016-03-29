@@ -57,16 +57,28 @@
 
 
 
-<meta name="description" content="fromNuf的板子是4.4的，所以用api 19作为target，这样，studio中打开的SDK也是来自19的">
+<meta name="description" content="#学习C++标准库第二版第五章 utils
+
+
+这本书英文版是全开放和免费的，1100页中文版页1k页，130左右，于是我还是自己来看英文版吧最急需的就是经常用到的一些所谓的工具类，比如map pair这些。
+第五章 主要是讲pair&amp;lt;&amp;gt;和tuple&amp;lt;&amp;gt;智能指针 shared_ptr和unique_ptr数字限制类型特质和类型工具辅助函数（比如 min()、max(),sw">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MediaCodecExample">
-<meta property="og:url" content="http://yoursite.com/2016/02/18/mediacodec_example/index.html">
+<meta property="og:title" content="5 utils">
+<meta property="og:url" content="http://yoursite.com/2016/03/28/CPP2_5_UTILS/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="fromNuf的板子是4.4的，所以用api 19作为target，这样，studio中打开的SDK也是来自19的">
-<meta property="og:updated_time" content="2016-02-18T07:08:35.538Z">
+<meta property="og:description" content="#学习C++标准库第二版第五章 utils
+
+
+这本书英文版是全开放和免费的，1100页中文版页1k页，130左右，于是我还是自己来看英文版吧最急需的就是经常用到的一些所谓的工具类，比如map pair这些。
+第五章 主要是讲pair&amp;lt;&amp;gt;和tuple&amp;lt;&amp;gt;智能指针 shared_ptr和unique_ptr数字限制类型特质和类型工具辅助函数（比如 min()、max(),sw">
+<meta property="og:updated_time" content="2016-03-28T12:30:46.085Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MediaCodecExample">
-<meta name="twitter:description" content="fromNuf的板子是4.4的，所以用api 19作为target，这样，studio中打开的SDK也是来自19的">
+<meta name="twitter:title" content="5 utils">
+<meta name="twitter:description" content="#学习C++标准库第二版第五章 utils
+
+
+这本书英文版是全开放和免费的，1100页中文版页1k页，130左右，于是我还是自己来看英文版吧最急需的就是经常用到的一些所谓的工具类，比如map pair这些。
+第五章 主要是讲pair&amp;lt;&amp;gt;和tuple&amp;lt;&amp;gt;智能指针 shared_ptr和unique_ptr数字限制类型特质和类型工具辅助函数（比如 min()、max(),sw">
 
 
 
@@ -84,7 +96,7 @@
   };
 </script>
 
-  <title> MediaCodecExample | Hexo </title>
+  <title> 5 utils | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -224,7 +236,7 @@
             
             
               
-                MediaCodecExample
+                5 utils
               
             
           </h1>
@@ -236,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-02-18T15:08:35+08:00" content="2016-02-18">
-              2016-02-18
+            <time itemprop="dateCreated" datetime="2016-03-28T20:30:46+08:00" content="2016-03-28">
+              2016-03-28
             </time>
           </span>
 
@@ -262,10 +274,26 @@
       
 
       
-        <blockquote>
-<p>from<br>Nuf的板子是4.4的，所以用api 19作为target，这样，studio中打开的SDK也是来自19的</p>
+        <p>#学习C++标准库第二版第五章 utils</p>
+<hr>
+<blockquote>
+<p>这本书英文版是全开放和免费的，1100页<br>中文版页1k页，130左右，于是我还是自己来看英文版吧<br>最急需的就是经常用到的一些所谓的工具类，比如map pair这些。</p>
+<p>第五章 主要是讲<br>pair&lt;&gt;和tuple&lt;&gt;<br>智能指针 shared_ptr和unique_ptr<br>数字限制<br>类型特质和类型工具<br>辅助函数（比如 min()、max(),swap()）<br>类ratio&lt;&gt;<br>时钟和定时器<br>一些重要的c函数</p>
 </blockquote>
-
+<p>C++标准 第二十章 通用工具 是最为详尽的说明。</p>
+<p>type pair&lt;&gt; 用于两个值是否被当作一个单独的单元—比如，如果一个函数必须返回两个值或者当容器的元素是键/值 对的时候—并且，类型的特质用于是否复杂类型的转换是否必须。</p>
+<h1 id="5-1-pairs-和-tuples"><a href="#5-1-pairs-和-tuples" class="headerlink" title="5.1 pairs 和 tuples"></a>5.1 pairs 和 tuples</h1><ul>
+<li>C++98 不用重新定义一个一个特殊的类，从而可以处理两个不同类型的值对.</li>
+<li>TR1 引入tuple类，扩展这个概念，用于任意但数目有限定的元素，支持10个不同类型的元素。</li>
+<li>c++11 tuple类使用可变模板来实现，支持任意大小的多样化的集合。另外，pair类依旧用于两个元素并可以与一个两个元素tuple联合使用。</li>
+<li>但是，c++11的pair类扩展了很多。</li>
+</ul>
+<h1 id="5-1-1-pairs"><a href="#5-1-1-pairs" class="headerlink" title="5.1.1 pairs"></a>5.1.1 pairs</h1><p> 容器类map、multimap、unordered_map,以及unorder_multimap 使用paris 管理元素，这些元素是键值对 。其他的使用pairs的列子是返回两个值，比如minmax（）函数。</p>
+<p>pair结构定义在<utility>，提供表5.1的操作。原则上，你可以创建、复制、分配、交换并比较一个pair&lt;&gt;,并且类型定义 first_type 和 second_type 代表第一个和第二个元素的类型。</utility></p>
+<ul>
+<li>元素访问<br>想处理pair的值，直接访问对应的成员就好。事实上，这个类型是被定义为struct而非class的，这样所有的成员都是public的：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">struct</span> pair &#123;</span><br><span class="line"><span class="comment">// member</span></span><br><span class="line">T1 first;</span><br><span class="line">T2 second;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -276,16 +304,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/17/vlc_equalizer/" rel="next" title="VLC的均衡器">
-                <i class="fa fa-chevron-left"></i> VLC的均衡器
+              <a href="/2016/02/20/SCFFmpegMediaPlayer_ape/" rel="next" title="SCFFmpegMediaPlayer">
+                <i class="fa fa-chevron-left"></i> SCFFmpegMediaPlayer
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/02/19/compile_vlc_centos7x64/" rel="prev" title="Centos7x64_VLC_Compile">
-                Centos7x64_VLC_Compile <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/29/Android_offical_Framelayout/" rel="prev" title="官方文档Framelayout翻译">
+                官方文档Framelayout翻译 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -390,7 +418,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目錄</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#5-1-pairs-和-tuples"><span class="nav-number">1.</span> <span class="nav-text">5.1 pairs 和 tuples</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-1-1-pairs"><span class="nav-number">2.</span> <span class="nav-text">5.1.1 pairs</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
