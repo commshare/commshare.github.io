@@ -64,14 +64,14 @@
 第五章 主要是讲pair&amp;lt;&amp;gt;和tuple&amp;lt;&amp;gt;智能指针 shared_ptr和unique_ptr数字限制类型特质和类型工具辅助函数（比如 min()、max(),sw">
 <meta property="og:type" content="article">
 <meta property="og:title" content="5 utils">
-<meta property="og:url" content="http://yoursite.com/2016/03/28/CPP2_5_UTILS/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/03/31/CPP2_5_UTILS/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="#学习C++标准库第二版第五章 utils
 
 
 这本书英文版是全开放和免费的，1100页中文版页1k页，130左右，于是我还是自己来看英文版吧最急需的就是经常用到的一些所谓的工具类，比如map pair这些。
 第五章 主要是讲pair&amp;lt;&amp;gt;和tuple&amp;lt;&amp;gt;智能指针 shared_ptr和unique_ptr数字限制类型特质和类型工具辅助函数（比如 min()、max(),sw">
-<meta property="og:updated_time" content="2016-03-28T12:30:46.085Z">
+<meta property="og:updated_time" content="2016-03-31T06:46:09.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="5 utils">
 <meta name="twitter:description" content="#学习C++标准库第二版第五章 utils
@@ -248,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-03-28T20:30:46+08:00" content="2016-03-28">
-              2016-03-28
+            <time itemprop="dateCreated" datetime="2016-03-31T14:46:09+08:00" content="2016-03-31">
+              2016-03-31
             </time>
           </span>
 
@@ -294,6 +294,29 @@
 <li>元素访问<br>想处理pair的值，直接访问对应的成员就好。事实上，这个类型是被定义为struct而非class的，这样所有的成员都是public的：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">struct</span> pair &#123;</span><br><span class="line"><span class="comment">// member</span></span><br><span class="line">T1 first;</span><br><span class="line">T2 second;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="第七章-STL-容器"><a href="#第七章-STL-容器" class="headerlink" title="第七章 STL 容器"></a>第七章 STL 容器</h1><ul>
+<li>第八章是对本章的补充，重点解释了容器 成员、类型和操作。</li>
+<li>C++ 标准库提供的特殊的容器类，所谓的容器适配器（stack 、queue 和 priority queue ），另外，少数类提供一个容器类似的接口（比如 strings、bitsets 和 valarrays ），所有这些类会分别单独介绍。</li>
+<li>容器适配器 和bitsets 在十二章讲，strings的STL 接口 在13.2.14中。</li>
+<li>历史原因，导致容器适配器是STL的一部分，但是从连续的观点看，他们不是STL框架的一部分而是仅仅使用了STL。</li>
+</ul>
+<h2 id="7-1-通用容器能力和操作"><a href="#7-1-通用容器能力和操作" class="headerlink" title="7.1 通用容器能力和操作"></a>7.1 通用容器能力和操作</h2><h3 id="7-1-1-容器能力"><a href="#7-1-1-容器能力" class="headerlink" title="7.1.1 容器能力"></a>7.1.1 容器能力</h3><p>有三种STL容易都应该具备的能力：</p>
+<ol>
+<li>所有容器提供的是值而不是引用的语法。移动元素<br> 被插入时，容器内部 copy and/or move  元素，而不是管理对他们的应用。这样，理想化的，每个STL容器的元素必须能被复制和移动。如果你想存储的对象不含有一个public的 拷贝构造函数，或者日过复制是不是有用的—因为，比如，花费的时间太多了 或者 元素比是multiple 容器的一部分—你可能仅仅使用move 操作就够了，或者容器元素必须是指针或者指针对象，指向的是这些对象。 7.11有一个例子，使用共享指针获取引用的语法。</li>
+<li><p>容器内部的元素是有特定顺调用者必序的，每个容器都会提供一个迭代器给你遍历元素。这是STL算法的关键特性。因此，如果你在元素上遍历多次，你会发现顺序都是一样的，即使是 “无序容器” 也是这样的，只要你不调用添加或者删除元素的操作，或者强迫一个内部的重新组织。</p>
+</li>
+<li><p>一般来说，操作不是安全的，会检查每一种可能的错误。 调用者必须确保操作的参数都满足操作所有的需求。违反了这些要求的话，比如使用了不合理的index，会导致未定义的行为，这意味着任何事情都会发生。</p>
+</li>
+</ol>
+<p>通常，STL容器并不自己抛出异常，如果用户定义的操作被STL容器调用做出了抛出异常，那么行为是不同。</p>
+<h4 id="7-1-2-容器操作"><a href="#7-1-2-容器操作" class="headerlink" title="7.1.2 容器操作"></a>7.1.2 容器操作</h4><h2 id="7-8-maps-和-multimaps"><a href="#7-8-maps-和-multimaps" class="headerlink" title="7.8 maps 和 multimaps"></a>7.8 maps 和 multimaps</h2><ul>
+<li>这俩是管理键值对作为元素的。 </li>
+<li>这种容器对自己的元素进行自动排序，依据的是对于key的某一种排序的标准。</li>
+<li>这俩的区别在于，multimaps 运行复制，然而maps不允许。</li>
+<li>头文件是 <map></map></li>
+<li>命名空间std中作为类模板定义的类型 ，头文件中的定义：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span>&#123;</span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> T , <span class="keyword">typename</span> Compare = less&lt;Key&gt; , </span><br><span class="line">              <span class="keyword">typename</span> Allocatator = allocator&lt; pair&lt;<span class="keyword">const</span> Key,T&gt; &gt;  &gt;</span><br><span class="line">    <span class="keyword">class</span> <span class="built_in">map</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key ,<span class="keyword">typename</span> T , <span class="keyword">typename</span> Compare =less&lt;key&gt;, <span class="keyword">typename</span> Allocator= allocator&lt;pair&lt;<span class="keyword">const</span>,Key, T &gt;&gt;  &gt;</span><br><span class="line">    <span class="keyword">class</span> <span class="built_in">multimap</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -304,16 +327,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/20/SCFFmpegMediaPlayer_ape/" rel="next" title="SCFFmpegMediaPlayer">
-                <i class="fa fa-chevron-left"></i> SCFFmpegMediaPlayer
+              <a href="/2016/03/29/Android_offical_Framelayout/" rel="next" title="官方文档Framelayout翻译">
+                <i class="fa fa-chevron-left"></i> 官方文档Framelayout翻译
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/29/Android_offical_Framelayout/" rel="prev" title="官方文档Framelayout翻译">
-                官方文档Framelayout翻译 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/07/SIP_SYSTEM_DEPLOY/" rel="prev" title="centos7 SIP 服务器搭建">
+                centos7 SIP 服务器搭建 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -382,7 +405,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -418,7 +441,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#5-1-pairs-和-tuples"><span class="nav-number">1.</span> <span class="nav-text">5.1 pairs 和 tuples</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-1-1-pairs"><span class="nav-number">2.</span> <span class="nav-text">5.1.1 pairs</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#5-1-pairs-和-tuples"><span class="nav-number">1.</span> <span class="nav-text">5.1 pairs 和 tuples</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-1-1-pairs"><span class="nav-number">2.</span> <span class="nav-text">5.1.1 pairs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七章-STL-容器"><span class="nav-number">3.</span> <span class="nav-text">第七章 STL 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-通用容器能力和操作"><span class="nav-number">3.1.</span> <span class="nav-text">7.1 通用容器能力和操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-1-容器能力"><span class="nav-number">3.1.1.</span> <span class="nav-text">7.1.1 容器能力</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-2-容器操作"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">7.1.2 容器操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-8-maps-和-multimaps"><span class="nav-number">3.2.</span> <span class="nav-text">7.8 maps 和 multimaps</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

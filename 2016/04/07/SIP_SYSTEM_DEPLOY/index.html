@@ -1,0 +1,765 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="#sip 服务器和客户端
+
+1 服务器粗略扫荡了github，看了一点文章，选项的目标不再是小巧精悍，方便学习，而是功能实用，稳定，方便配置，用的人多，这样的工业级需求。
+kamilio作为服务器，jitsi作为客户端，android端用csipsimple。我感觉作为第一次使用，实践证明，他们都是不错的。
+1.1 kamilio
+github上的工程，据说SER的直接儿子，opensips是分家">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos7 SIP 服务器搭建">
+<meta property="og:url" content="http://yoursite.com/2016/04/07/SIP_SYSTEM_DEPLOY/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#sip 服务器和客户端
+
+1 服务器粗略扫荡了github，看了一点文章，选项的目标不再是小巧精悍，方便学习，而是功能实用，稳定，方便配置，用的人多，这样的工业级需求。
+kamilio作为服务器，jitsi作为客户端，android端用csipsimple。我感觉作为第一次使用，实践证明，他们都是不错的。
+1.1 kamilio
+github上的工程，据说SER的直接儿子，opensips是分家">
+<meta property="og:updated_time" content="2016-04-07T09:08:24.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos7 SIP 服务器搭建">
+<meta name="twitter:description" content="#sip 服务器和客户端
+
+1 服务器粗略扫荡了github，看了一点文章，选项的目标不再是小巧精悍，方便学习，而是功能实用，稳定，方便配置，用的人多，这样的工业级需求。
+kamilio作为服务器，jitsi作为客户端，android端用csipsimple。我感觉作为第一次使用，实践证明，他们都是不错的。
+1.1 kamilio
+github上的工程，据说SER的直接儿子，opensips是分家">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> centos7 SIP 服务器搭建 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                centos7 SIP 服务器搭建
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2016-04-07T17:08:24+08:00" content="2016-04-07">
+              2016-04-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#sip 服务器和客户端</p>
+<hr>
+<h1 id="1-服务器"><a href="#1-服务器" class="headerlink" title="1 服务器"></a>1 服务器</h1><p>粗略扫荡了github，看了一点文章，选项的目标不再是小巧精悍，方便学习，而是功能实用，稳定，方便配置，用的人多，这样的工业级需求。</p>
+<p>kamilio作为服务器，jitsi作为客户端，android端用csipsimple。我感觉作为第一次使用，实践证明，他们都是不错的。</p>
+<h2 id="1-1-kamilio"><a href="#1-1-kamilio" class="headerlink" title="1.1 kamilio"></a>1.1 kamilio</h2><blockquote>
+<p>github上的工程，据说SER的直接儿子，opensips是分家的儿子。</p>
+<p>至于为啥选kamilio，我也说不清楚，有个老外写了一篇文章，大体就是说kamilio历史悠久，他用了很多年了。</p>
+</blockquote>
+<h2 id="1-2-当前最新的稳定的4-4-版本"><a href="#1-2-当前最新的稳定的4-4-版本" class="headerlink" title="1.2  当前最新的稳定的4.4 版本"></a>1.2  当前最新的稳定的4.4 版本</h2><p> 从git安装，参考<a href="http://www.kamailio.org/wiki" target="_blank" rel="external">官方wiki</a></p>
+<p>貌似是创建了一个本地分支4.4？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b <span class="number">4.4</span> origin/<span class="number">4.4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">make</span> cfg  <span class="comment">##检测host，生成一个modules的列表</span></span><br></pre></td></tr></table></figure>
+<p>然后，修改列表modules.lst ，加入mysql数据库模块。<br><figure class="highlight fix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">include_modules</span>=<span class="string"> db_mysql</span></span><br></pre></td></tr></table></figure></p>
+<p>或者，可以这样：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">make</span> include_modules=<span class="string">"db_mysql dialplan"</span> cfg</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">make</span> <span class="keyword">all</span>   ##如果想打开编译的打印，那么使用<span class="keyword">make</span> Q=<span class="number">0</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">make</span> install</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-安装得到："><a href="#1-3-安装得到：" class="headerlink" title="1.3 安装得到："></a>1.3 安装得到：</h2><ul>
+<li>模块在： /usr/local/lib/kamailio/modules/</li>
+<li><p>程序在：</p>
+<p>/usr/local/sbin 下面的</p>
+</li>
+</ul>
+<p>kamailio - Kamailio SIP server<br>kamdbctl - script to create and manage the Databases<br>kamctl - script to manage and control Kamailio SIP server<br>kamcmd - CLI - command line tool to interface with Kamailio SIP server</p>
+<p>实际上，使用最多的是kamctl</p>
+<ul>
+<li>配置 /usr/local/etc/kamailio</li>
+</ul>
+<h2 id="1-4-mysql的问题"><a href="#1-4-mysql的问题" class="headerlink" title="1.4  mysql的问题"></a>1.4  mysql的问题</h2><h3 id="1-4-1-安装"><a href="#1-4-1-安装" class="headerlink" title="1.4.1 安装"></a>1.4.1 安装</h3><p>centos7 没有mysql了。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> mariadb-server mariadb <span class="comment">#</span></span><br><span class="line">sudo yum <span class="keyword">install</span> mysql-devel  <span class="comment">#编译用的库</span></span><br></pre></td></tr></table></figure>
+<p>得到   mariadb-devel.x86_64 1:5.5.47-1.el7_2         </p>
+<p>并更新了   mariadb-libs.x86_64 1:5.5.47-1.el7_2    </p>
+<h3 id="1-4-2-重新编译kamilio"><a href="#1-4-2-重新编译kamilio" class="headerlink" title="1.4.2 重新编译kamilio"></a>1.4.2 重新编译kamilio</h3><p>使用make Q=0 all 重新编译加入了mysql数据库的kamilio。</p>
+<p>make install</p>
+<h3 id="1-4-3-mysql-配置root"><a href="#1-4-3-mysql-配置root" class="headerlink" title="1.4.3 mysql 配置root"></a>1.4.3 mysql 配置root</h3><p>默认的mysql是没有密码的，使用如下可以自动登录：<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">mysql:</span><span class="preprocessor">#bin/mysql -uroot -p</span></span><br></pre></td></tr></table></figure></p>
+<p>设置root密码：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">update</span> mysql.<span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">password</span>=<span class="keyword">password</span>(<span class="string">'zhangbin'</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">'root'</span>;</span></span><br></pre></td></tr></table></figure></p>
+<p>刷新mysql的系统权限相关表，使密码生效:<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;flush privileges<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>重启mysql：<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="constant">@Centos7x64Ali</span> kamailio]<span class="preprocessor"># systemctl stop mariadb </span></span><br><span class="line">[root<span class="constant">@Centos7x64Ali</span> kamailio]<span class="preprocessor"># systemctl start mariadb</span></span><br><span class="line">[root<span class="constant">@Centos7x64Ali</span> kamailio]<span class="preprocessor"># systemctl status mariadb</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-5-kamctl的配置数据库"><a href="#1-5-kamctl的配置数据库" class="headerlink" title="1.5  kamctl的配置数据库"></a>1.5  kamctl的配置数据库</h2><p>修改 /usr/local/etc/kamailio/kamctlrc</p>
+<ul>
+<li><p>kamailio - (with default password ‘kamailiorw’) - user which has full access rights to ‘kamailio’ database</p>
+</li>
+<li><p>kamailioro - (with default password ‘kamailioro’) - user which has read-only access rights to ‘kamailio’ database</p>
+</li>
+</ul>
+<ul>
+<li>使用   /usr/local/sbin/kamdbctl create 来生成。</li>
+</ul>
+<h2 id="1-6-服务器配置"><a href="#1-6-服务器配置" class="headerlink" title="1.6 服务器配置"></a>1.6 服务器配置</h2><ul>
+<li>/usr/local/etc/kamailio/kamailio.cfg</li>
+<li>检查配置<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">kamailio</span> -c</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>启动服务<br>/usr/local/sbin/kamctl  start</li>
+</ul>
+<p>[root@Centos7x64Ali kamailio]# kamctl<br>/usr/local/sbin/kamctl 4.4.0</p>
+<p>Existing commands:</p>
+<p>– command ‘start|stop|restart|trap’</p>
+<p>trap …………………………. trap with gdb Kamailio processes<br>restart ………………………. restart Kamailio<br>start ………………………… start Kamailio<br>stop …………………………. stop Kamailio</p>
+<ul>
+<li>监控<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">kamctl</span> moni</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="1-7-增加sip用户"><a href="#1-7-增加sip用户" class="headerlink" title="1.7 增加sip用户"></a>1.7 增加sip用户</h2><p>数据库的读写用户”kamailio”，他的密码”kamailiorw”</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Centos7x64Ali kamailio]<span class="comment"># kamctl add 3000 12345</span></span><br><span class="line">MySQL password for <span class="keyword">user</span> <span class="title">'kamailio</span>@localhost':</span><br><span class="line">new <span class="keyword">user</span> <span class="title">'3000</span>' added</span><br></pre></td></tr></table></figure>
+<p>显示用户</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@Centos7x64Ali kamailio]<span class="preprocessor"># kamctl ul show      </span></span><br><span class="line">Domain:: location table=<span class="number">1024</span> records=<span class="number">1</span> max_slot=<span class="number">1</span></span><br><span class="line">        AOR:: <span class="number">1000</span></span><br><span class="line">                Contact:: sip:<span class="number">1000</span>@<span class="number">172.16</span><span class="number">.34</span><span class="number">.99</span>:<span class="number">5060</span>;transport=udp;registering_acc=我的公网ip地址 Q=</span><br><span class="line">                        Expires:: <span class="number">166</span></span><br><span class="line">                        Callid:: <span class="number">3</span>c263046fd4b977515a06615f0e9f06b@<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span></span><br><span class="line">                        Cseq:: <span class="number">12</span></span><br><span class="line">                        User-agent:: Jitsi2<span class="number">.8</span><span class="number">.5426</span>Windows <span class="number">8</span></span><br><span class="line">                        Received:: sip:<span class="number">121.33</span><span class="number">.218</span><span class="number">.226</span>:<span class="number">5060</span></span><br><span class="line">                        State:: CS_SYNC</span><br><span class="line">                        Flags:: <span class="number">0</span></span><br><span class="line">                        Cflag:: <span class="number">64</span></span><br><span class="line">                        Socket:: udp:<span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span>:<span class="number">5060</span></span><br><span class="line">                        Methods:: <span class="number">4294967295</span></span><br><span class="line">                        Ruid:: uloc-<span class="number">5704</span>c664-<span class="number">113</span>c-<span class="number">1</span></span><br><span class="line">                        Reg-Id:: <span class="number">0</span></span><br><span class="line">                        Last-Keepalive:: <span class="number">1459933785</span></span><br><span class="line">                        Last-Modified:: <span class="number">1459933785</span></span><br><span class="line">[root@Centos7x64Ali kamailio]<span class="preprocessor">#</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-rtpproxy的NAT穿透"><a href="#2-rtpproxy的NAT穿透" class="headerlink" title="2 rtpproxy的NAT穿透"></a>2 rtpproxy的NAT穿透</h1><blockquote>
+<p>穿透的技术很多，stun ice 我都没搞懂呢。kamilio用的是rtpproxy，先试用下这个了。<br>官方支持的NAT穿透就是用这个，必须自己编译和安装。</p>
+</blockquote>
+<h2 id="2-1-编译"><a href="#2-1-编译" class="headerlink" title="2.1 编译"></a>2.1 编译</h2><ul>
+<li><p>官方当前最新 rtpproxy-2.0.0 ，从github上下载，官网貌似没有看到什么内容啊。</p>
+</li>
+<li><p>直接configure make make install 。</p>
+</li>
+<li><p>源码安装得到没有配置文件，不用找了。程序在：<br>libtool: install: /usr/bin/install -c rtpproxy_debug /usr/local/bin/rtpproxy_debug</p>
+</li>
+</ul>
+<h2 id="2-2-运行rtpproxy"><a href="#2-2-运行rtpproxy" class="headerlink" title="2.2 运行rtpproxy"></a>2.2 运行rtpproxy</h2><p>服务器配置文件要求这么使用：</p>
+<pre><code>- install RTPProxy: http://www.rtpproxy.org
+ - start RTPProxy:
+  rtpproxy -l _your_public_ip_ -s udp:localhost:7722
+- option for NAT SIP OPTIONS keepalives: WITH_NATSIPPING
+</code></pre><p>我输入的命令：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rtpproxy -l _your_public_ip_ -s <span class="string">udp:</span><span class="string">localhost:</span><span class="number">7722</span> -F <span class="comment">//强制使用root执行</span></span><br></pre></td></tr></table></figure></p>
+<p>其他的用服务器的默认配置文件就好了。</p>
+<h2 id="2-3-重启kamilio"><a href="#2-3-重启kamilio" class="headerlink" title="2.3 重启kamilio"></a>2.3 重启kamilio</h2><p>kamctl stop/start </p>
+<p>#3 客户端用linphone</p>
+<p>手机和win上都用，他们俩可以互通。<br>csipsimple app 虽然也很牛x，但是无法和pc的linphone交互SDP，linphone不认识它的SDP：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> channel [<span class="number">053F</span>6FA8] [<span class="number">562</span>] bytes parsed</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> channel [<span class="number">053F</span>6FA8] read [<span class="number">305</span>] bytes of body from [<span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span>:<span class="number">5060</span>]</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> Found transaction matching response.</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> Changing [client] [INVITE] transaction [<span class="number">0540E650</span>], from state [PROCEEDING] to [ACCEPTED]</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> Dialog [<span class="number">053</span>C0538]: now updated by transaction [<span class="number">0540E650</span>].</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> op [<span class="number">053F</span>3840] : set_or_update_dialog() current=[<span class="number">053</span>C0538] <span class="keyword">new</span>=[<span class="number">053</span>C0538]</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> Op [<span class="number">053F</span>3840] receiving call response [<span class="number">200</span>], dialog is [<span class="number">053</span>C0538] in state [BELLE_SIP_DIALOG_CONFIRMED]</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> [org.antlr.runtime.EarlyExitException] reason [Unexpected token] at line[<span class="number">13</span>] position[<span class="number">17</span>]</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> [org.antlr.runtime.EarlyExitException] reason [Unexpected token] at line[<span class="number">13</span>] position[<span class="number">17</span>]</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> [org.antlr.runtime.EarlyExitException] reason [Unexpected token] at line[<span class="number">13</span>] position[<span class="number">17</span>]</span><br><span class="line">error: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> session_description parser error <span class="keyword">for</span> [v=<span class="number">0</span></span><br><span class="line">o=- <span class="number">3669002258</span> <span class="number">3669002260</span> IN IP4 <span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span></span><br><span class="line">s=pjmedia</span><br><span class="line">c=IN IP4 <span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span></span><br><span class="line">t=<span class="number">0</span> <span class="number">0</span></span><br><span class="line">m=audio <span class="number">54134</span> RTP/AVP <span class="number">0</span> <span class="number">102</span></span><br><span class="line">c=IN IP4 <span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span></span><br><span class="line">a=rtcp:<span class="number">54135</span></span><br><span class="line">a=sendrecv</span><br><span class="line">a=rtpmap:<span class="number">0</span> PCMU/<span class="number">8000</span></span><br><span class="line">a=rtpmap:<span class="number">102</span> telephone-event/<span class="number">8000</span></span><br><span class="line">a=fmtp:<span class="number">102</span> <span class="number">0</span>-<span class="number">16</span></span><br><span class="line">m=video <span class="number">0</span> RTP/AVP</span><br><span class="line">c=IN IP4 <span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span></span><br><span class="line">a=nortpproxy:yes</span><br><span class="line">]</span><br><span class="line">error: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> Failed to parse SDP message.</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> Doing SDP offer/answer process of type outgoing</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">202</span> Computing branch id z9hG4bK<span class="number">.1u</span>rWDoo0e <span class="keyword">for</span> message sent statelessly</span><br><span class="line">message: <span class="number">2016</span>-<span class="number">04</span>-<span class="number">07</span> <span class="number">15</span>:<span class="number">17</span>:<span class="number">46</span>:<span class="number">203</span> channel [<span class="number">053F</span>6FA8]: message sent to [UDP:<span class="comment">//120.25.89.81:5060], size: [510] bytes</span></span><br><span class="line">ACK sip:<span class="number">3000</span>@<span class="number">121.33</span><span class="number">.218</span><span class="number">.226</span>:<span class="number">39743</span>;ob SIP/<span class="number">2.0</span></span><br><span class="line">Via: SIP/<span class="number">2.0</span>/UDP <span class="number">192.168</span><span class="number">.10</span><span class="number">.22</span>:<span class="number">5060</span>;rport;branch=z9hG4bK<span class="number">.1u</span>rWDoo0e</span><br><span class="line">From: &lt;sip:<span class="number">5000</span>@<span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span>&gt;;tag=OoAQhSxpW</span><br><span class="line">To: <span class="string">"3000"</span> &lt;sip:<span class="number">3000</span>@<span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span>&gt;;tag=BAVFsbQDSEzVaGixKlNkb7f40ku133ya</span><br><span class="line">CSeq: <span class="number">21</span> ACK</span><br><span class="line">Call-ID: O5TOA9u--<span class="number">4</span></span><br><span class="line">Max-Forwards: <span class="number">70</span></span><br><span class="line">Route: &lt;sip:<span class="number">120.25</span><span class="number">.89</span><span class="number">.81</span>;lr;nat=yes&gt;</span><br><span class="line">Proxy-Authorization:  Digest realm=<span class="string">"120.25.89.81"</span>, nonce=<span class="string">"VwYKw1cGCZeGPE24ApOPNz2Ol5k6naDs"</span>, username=<span class="string">"5000"</span>,  uri=<span class="string">"sip:3000@120.25.89.81"</span>, response=<span class="string">"76d365eb3e34fddf149faf85528d7020"</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/31/CPP2_5_UTILS/" rel="next" title="5 utils">
+                <i class="fa fa-chevron-left"></i> 5 utils
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/07/SIP_SYSTEM_DEPLOY_config/" rel="prev" title="centos7 SIP 服务器我的配置">
+                centos7 SIP 服务器我的配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+          
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-服务器"><span class="nav-number">1.</span> <span class="nav-text">1 服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-kamilio"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 kamilio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-当前最新的稳定的4-4-版本"><span class="nav-number">1.2.</span> <span class="nav-text">1.2  当前最新的稳定的4.4 版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-安装得到："><span class="nav-number">1.3.</span> <span class="nav-text">1.3 安装得到：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-mysql的问题"><span class="nav-number">1.4.</span> <span class="nav-text">1.4  mysql的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-安装"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-重新编译kamilio"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 重新编译kamilio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-mysql-配置root"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.4.3 mysql 配置root</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-kamctl的配置数据库"><span class="nav-number">1.5.</span> <span class="nav-text">1.5  kamctl的配置数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-服务器配置"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 服务器配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-增加sip用户"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 增加sip用户</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-rtpproxy的NAT穿透"><span class="nav-number">2.</span> <span class="nav-text">2 rtpproxy的NAT穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-编译"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-运行rtpproxy"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 运行rtpproxy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-重启kamilio"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 重启kamilio</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+</body>
+</html>
